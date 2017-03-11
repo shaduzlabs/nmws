@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>nmws demo</title>
+  <link rel="stylesheet" type="text/css" href="assets/css/siimple.min.css">
+  <link rel="stylesheet" type="text/css" href="assets/css/nmws-demo.css">
+
+  <script src="assets/js/nmws.min.js"></script>
+
+  <script src="assets/js/scripts.js"></script>
+</head>
+
+<body>
+  <div class="siimple-h1">nmws demo</div>
+
+  <label class="siimple-label">Type a message: </label>
+  <input type="text" class="siimple-input" placeholder="Type here your message" id="message-to-server">
+  <div class="siimple-btn siimple-btn--blue" onClick="sendMessageToServer()">send to server</div>
+  <div id="events"></div>
+
+</body>
+
+</html>

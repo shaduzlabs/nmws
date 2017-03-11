@@ -1,0 +1,10 @@
+/*
+        ##########    Copyright (C) 2017 Vincenzo Pacella
+        ##      ##    Distributed under MIT license, see file LICENSE
+        ##      ##    or <http://opensource.org/licenses/MIT>
+        ##      ##
+##########      ############################################################# shaduzlabs.com #####*/
+
+#define NANOWS_VERSION_MAJOR @NANOWS_VERSION_MAJOR@
+#define NANOWS_VERSION_MINOR @NANOWS_VERSION_MINOR@
+#define NANOWS_VERSION_MICRO @NANOWS_VERSION_MICRO@
