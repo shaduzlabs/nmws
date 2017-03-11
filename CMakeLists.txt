@@ -23,7 +23,7 @@ endif()
 
 list(APPEND CMAKE_MODULE_PATH "${NMWS_ROOT_DIR}/cmake")
 
-set(DEBUG_SUFFIX          "_d")
+set(DEBUG_SUFFIX "_d")
 
 
 # Version ---------------------------------------------------------------------------------------- #
