@@ -1,3 +1,10 @@
+
+        ##########    Copyright (C) 2017 Vincenzo Pacella
+        ##      ##    Distributed under MIT license, see file LICENSE
+        ##      ##    or <http://opensource.org/licenses/MIT>
+        ##      ##
+##########      ############################################################# shaduzlabs.com #######
+
 message (STATUS "Checking for nanomsg...")
 
 if(NOT DEFINED NANOMSG_ROOT)

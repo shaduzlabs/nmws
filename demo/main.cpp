@@ -1,5 +1,5 @@
 /*
-        ##########    Copyright (C) 2015 Vincenzo Pacella
+        ##########    Copyright (C) 2017 Vincenzo Pacella
         ##      ##    Distributed under MIT license, see file LICENSE
         ##      ##    or <http://opensource.org/licenses/MIT>
         ##      ##
@@ -26,6 +26,7 @@ int main(int argc_, char* argv_[])
     std::cout << "nanomsg websocket wrapper" << std::endl;
 
     s.bind("ws://127.0.0.1:8888");
+
     s.setMessageCallback([&s](std::string message) {
       std::cout << "Received " << message.size() << " bytes: " << message << std::endl;
       s.send(message);

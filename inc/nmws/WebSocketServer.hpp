@@ -1,5 +1,5 @@
 /*
-        ##########    Copyright (C) 2015 Vincenzo Pacella
+        ##########    Copyright (C) 2017 Vincenzo Pacella
         ##      ##    Distributed under MIT license, see file LICENSE
         ##      ##    or <http://opensource.org/licenses/MIT>
         ##      ##

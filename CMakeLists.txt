@@ -1,5 +1,5 @@
 
-        ##########    Copyright (C) 2015 Vincenzo Pacella
+        ##########    Copyright (C) 2017 Vincenzo Pacella
         ##      ##    Distributed under MIT license, see file LICENSE
         ##      ##    or <http://opensource.org/licenses/MIT>
         ##      ##
@@ -24,8 +24,6 @@ endif()
 list(APPEND CMAKE_MODULE_PATH "${NMWS_ROOT_DIR}/cmake")
 
 set(DEBUG_SUFFIX          "_d")
-
-# Options ---------------------------------------------------------------------------------------- #
 
 
 # Version ---------------------------------------------------------------------------------------- #
