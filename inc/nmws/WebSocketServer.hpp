@@ -92,7 +92,7 @@ public:
 
     {
       std::lock_guard<std::mutex> lock(m_socketMutex);
-      result = nn_send(m_socket, message_.c_str(), message_.size(), 0);
+      result = nn_send(m_socket, message_.c_str(), message_.size(), NN_DONTWAIT);
     }
 
     if (result < 0)
