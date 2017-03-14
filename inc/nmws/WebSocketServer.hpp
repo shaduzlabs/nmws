@@ -95,7 +95,7 @@ public:
       result = nn_send(m_socket, message_.c_str(), message_.size(), NN_DONTWAIT);
     }
 
-    if (result < 0)
+    if (result < 0 && nn_errno() != EAGAIN)
     {
       throw Exception();
     }
