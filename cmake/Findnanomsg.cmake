@@ -25,7 +25,7 @@ endif()
 
 find_library(NANOMSG_LIBRARIES
 	NAMES nanomsg
-	PATHS ${NANOMSG_ROOT}
+	HINTS ${NANOMSG_ROOT}
 	PATH_SUFFIXES lib bin
 )
 
