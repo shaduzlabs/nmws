@@ -67,8 +67,8 @@ else()
 endif()
 
 configure_file (
-  "${NMWS_ROOT_DIR}/support/config.h.in"
-  "${PROJECT_BINARY_DIR}/config.h"
+  "${NMWS_ROOT_DIR}/support/nmws.h.in"
+  "${PROJECT_BINARY_DIR}/nmws.h"
 )
 
 if($ENV{APPVEYOR})
@@ -103,16 +103,11 @@ message( "[${NMWS_BUILD_DATE}] ${NMWS_BUILD_DESCRIPTION} ")
 find_package(nanomsg REQUIRED)
 
 
-# Includes --------------------------------------------------------------------------------------- #
-
-include_directories("${PROJECT_BINARY_DIR}")
-
-
 # Target configuration --------------------------------------------------------------------------- #
 
 add_library(nmws INTERFACE )
 target_link_libraries( nmws INTERFACE ${NANOMSG_LIBRARIES})
-target_include_directories( nmws INTERFACE inc ${NANOMSG_INCLUDE_DIRS})
+target_include_directories( nmws INTERFACE inc ${PROJECT_BINARY_DIR} ${NANOMSG_INCLUDE_DIRS})
 
 if(${IS_NMWS})
   add_subdirectory(demo)
