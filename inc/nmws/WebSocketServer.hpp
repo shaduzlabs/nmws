@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include "nmws/Exception.hpp"
+#include <nmws/Exception.hpp>
 
 #include <nanomsg/nn.h>
 #include <nanomsg/pair.h>
@@ -41,8 +41,9 @@ public:
 
   ~WebSocketServer()
   {
+    nn_term();
     m_running.store(false);
-    assert(nn_close(m_socket) == 0);
+    nn_close(m_socket);
     if (m_receiveThread.joinable())
     {
       m_receiveThread.join();
@@ -78,10 +79,8 @@ public:
   {
     m_receiveThread = std::thread([this]() {
       m_running.store(true);
-      while (m_running)
+      while (receive())
       {
-        receive();
-        std::this_thread::sleep_for(std::chrono::milliseconds(1));
       }
     });
   }
@@ -92,10 +91,11 @@ public:
 
     {
       std::lock_guard<std::mutex> lock(m_socketMutex);
-      result = nn_send(m_socket, message_.c_str(), message_.size(), NN_DONTWAIT);
+      result = nn_send(m_socket, message_.c_str(), message_.size(), 0);
     }
 
-    if (result < 0 && nn_errno() != EAGAIN)
+    const auto nnError = nn_errno();
+    if (nnError != ETERM && nnError != EBADF)
     {
       throw Exception();
     }
@@ -108,25 +108,32 @@ public:
   }
 
 private:
-  void receive() const
+  bool receive() const
   {
     int result = -1;
     char* buffer = nullptr;
 
     {
       std::lock_guard<std::mutex> lock(m_socketMutex);
-      result = nn_recv(m_socket, &buffer, NN_MSG, NN_DONTWAIT);
+      result = nn_recv(m_socket, &buffer, NN_MSG, 0);
     }
 
-    if (result < 0 && nn_errno() != EAGAIN)
+    const auto nnError = nn_errno();
+    if (result < 0)
     {
-      throw Exception();
+      if (nnError != ETERM && nnError != EBADF)
+      {
+        throw Exception();
+      }
+      return false;
     }
 
     if (m_messageCallback && buffer != nullptr)
     {
       m_messageCallback(std::string(buffer, result));
     }
+
+    return true;
   }
 
   int m_socket;
@@ -136,6 +143,8 @@ private:
   std::atomic_bool m_running;
   std::thread m_receiveThread;
 };
+
 // -------------------------------------------------------------------------------------------------
+
 } // namespace nmws
 } // namespace sl
